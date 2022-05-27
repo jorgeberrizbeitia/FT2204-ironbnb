@@ -1,23 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from "./components/Navbar"
+import { Route, Routes } from 'react-router-dom';
+import Home from "./pages/Home"
+import AptList from "./pages/AptList"
+import AptDetails from "./pages/AptDetails"
+import AptForm from "./pages/AptForm"
+import Error from "./pages/Error"
+import NotFound from "./pages/NotFound"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Navbar />
+
+      <Routes>
+
+        <Route path="/" element={ <Home/> }/>
+        <Route path="/pisos" element={ <AptList/> }/>
+        <Route path="/pisos/:id/details" element={ <AptDetails/> }/>
+        <Route path="/pisos/add-form" element={ <AptForm/> }/>
+
+        {/* rutas de errores */}
+        <Route path="/error" element={ <Error/> }/>
+        <Route path="*" element={ <NotFound/> }/>
+
+      </Routes>
+
+
     </div>
   );
 }
