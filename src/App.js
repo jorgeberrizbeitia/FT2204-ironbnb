@@ -9,11 +9,21 @@ import AptForm from "./pages/AptForm"
 import Error from "./pages/Error"
 import NotFound from "./pages/NotFound"
 
+import { useState, useContext } from "react"
+import { ThemeContext } from "./context/theme.context"
+
 function App() {
+
+  const { toggleDarkMode, darkMode, darkTheme, lightTheme, btnDarkTheme, btnLightTheme } = useContext(ThemeContext)
+
   return (
-    <div className="App">
+    <div className="App" style={darkMode === true ? darkTheme : lightTheme}>
+
+      <button onClick={toggleDarkMode} style={darkMode === true ? btnDarkTheme : btnLightTheme}>Cambiar Tema</button>
 
       <Navbar />
+
+      <hr />
 
       <Routes>
 

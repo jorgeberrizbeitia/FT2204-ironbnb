@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 function AptList() {
+
+  // configurar el acceso de navegacion
+  const navigate = useNavigate()
 
   // 1. crear el estado que va a guardar la informacion
   const [ listaPisos, setListaPisos ] = useState(null)
@@ -20,16 +25,19 @@ function AptList() {
 
       const response = await axios.get("https://ironbnb-m3.herokuapp.com/apartments")
       console.log(response)
-      setListaPisos(response.data)
-      setBuscando(false)
+      // setTimeout(() => {
+        setListaPisos(response.data)
+        setBuscando(false)
+      // }, 2000)
     } catch (error) {
-      
+      // redirijimos a esa pagina de /error
+      navigate("/error")
     }
   }
 
   // 4. crear efecto de Loading
   if (buscando === true) {
-    return <h3>...Loading</h3>
+    return <PropagateLoader color={"green"}/>
   }
 
   return (
